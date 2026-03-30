@@ -85,7 +85,7 @@ Base: /api
 - POST /transfers
 - POST /deposits
 
-## Seguranca (producao)
+## Seguranca 
 
 - Minificar bundle no build e considerar ofuscacao apenas como camada extra.
 - Nunca expor segredos no frontend (VITE_ nao e local para segredo).

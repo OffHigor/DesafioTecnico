@@ -1,73 +1,95 @@
-# React + TypeScript + Vite
+# Onda Finance - Desafio Tecnico
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend de um painel bancario simples, construido para demonstrar qualidade de codigo, UX clara e boas praticas com React + TypeScript.
 
-Currently, two official plugins are available:
+## Visao rapida
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Login com rota protegida
+- Dashboard com saldo e transacoes
+- Deposito e transferencia com validacao
+- Atualizacao otimista da UI
+- Testes com Vitest e Testing Library
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + TypeScript
+- Vite 8
+- React Router
+- React Query
+- Zustand
+- React Hook Form + Zod
+- Tailwind CSS 4 + shadcn/ui
+- Axios com adapter mock
+- Vitest + Testing Library
 
-## Expanding the ESLint configuration
+## Como rodar
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Requisitos:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Node.js 20+
+- npm 10+
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Instalacao e execucao:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev        # desenvolvimento
+npm run test       # testes
+npm run lint       # lint
+npm run build      # build de producao
+npm run preview    # preview do build
 ```
+
+## Credenciais demo
+
+- Email: demo@onda.finance
+- Senha: 123456
+
+## Estrutura principal
+
+```text
+src/
+  components/
+    ui/
+    saldo-card.tsx
+    deposit-form.tsx
+    transfer-form.tsx
+    transaction-list.tsx
+  pages/
+    login-page.tsx
+    dashboard-page.tsx
+  routes/
+  services/
+  stores/
+  types/
+```
+
+## Comportamento atual
+
+- Sessao de login persiste em sessionStorage.
+- Saldo e transacoes nao persistem no navegador.
+- Ao recarregar a pagina, a conta volta para o estado inicial mockado.
+
+## API mock
+
+Base: /api
+
+- POST /auth/login
+- GET /account
+- POST /transfers
+- POST /deposits
+
+## Seguranca (producao)
+
+- Minificar bundle no build e considerar ofuscacao apenas como camada extra.
+- Nunca expor segredos no frontend (VITE_ nao e local para segredo).
+- Evitar XSS com renderizacao segura (React) e validacao de entrada (Zod).
+- Em ambiente real, usar JWT em cookie HttpOnly + Secure + SameSite.
+- Implementar logout por inatividade para reduzir risco de sessao aberta.
+
